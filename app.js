@@ -35,3 +35,37 @@ $("languageBtn").addEventListener("click",()=>{isEnglish=!isEnglish;$("languageB
 $("ownerForm").addEventListener("submit",e=>{e.preventDefault();$("ownerResult").classList.remove("hidden");$("ownerResult").innerHTML=`<b>डेमो आवेदन पूर्वावलोकन</b><br>रेस्टुरेन्ट: ${$("ownerRestaurant").value}<br>मालिक: ${$("ownerName").value}<br>स्थान: ${$("ownerCity").value}<br><br>यो आवेदन database मा पठाइएको छैन। वास्तविक आवेदनका लागि login, Supabase tables, image storage र admin approval workflow जडान गर्नुहोस्।`;toast("डेमो पूर्वावलोकन तयार भयो।")});
 document.addEventListener("click",async e=>{if(e.target.id==="shareBtn"){try{if(navigator.share)await navigator.share({title:currentRestaurant.name,text:currentRestaurant.description,url:location.href});else{await navigator.clipboard.writeText(location.href);toast("लिङ्क कपी गरियो।")}}catch(err){toast("सेयर गर्न सकिएन।")}}});
 renderHome();
+(async function testSupabaseConnection() {
+  const status = document.createElement("div");
+
+  status.style.cssText =
+    "padding:12px;margin:12px;border-radius:8px;" +
+    "background:#e8f5e9;color:#155724;font-size:14px;";
+
+  status.textContent = "Supabase connection जाँच हुँदैछ...";
+  document.body.appendChild(status);
+
+  try {
+    if (!window.supabase || typeof supabaseClient === "undefined") {
+      throw new Error("Supabase library वा client लोड भएको छैन।");
+    }
+
+    const { data, error } = await supabaseClient
+      .from("categories")
+      .select("id,name")
+      .limit(5);
+
+    if (error) throw error;
+
+    status.textContent =
+      "Supabase Connected! Categories प्राप्त भए: " + data.length;
+
+    console.log("Supabase test successful:", data);
+  } catch (error) {
+    status.style.background = "#ffebee";
+    status.style.color = "#b71c1c";
+    status.textContent = "Connection Error: " + error.message;
+
+    console.error("Supabase test failed:", error);
+  }
+})();
