@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="ne">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#b83224">
+  <title>नेपाली रेस्टुरेन्ट हब</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#" aria-label="नेपाली रेस्टुरेन्ट हब होम">
+      <span class="brand-mark">🍲</span><span><b>नेपाली रेस्टुरेन्ट हब</b><small>Nepali Restaurant Hub</small></span>
+    </a>
+    <nav class="desktop-nav" aria-label="मुख्य नेभिगेसन">
+      <button class="nav-link active" data-page="home">गृहपृष्ठ</button>
+      <button class="nav-link" data-page="explore">रेस्टुरेन्ट खोज्नुहोस्</button>
+      <button class="nav-link" data-page="owner">आफ्नो रेस्टुरेन्ट थप्नुहोस्</button>
+    </nav>
+    <div class="header-actions">
+      <button id="languageBtn" class="btn btn-light" aria-label="भाषा परिवर्तन">EN</button>
+      <button id="accountBtn" class="btn btn-dark">लगइन</button>
+    </div>
+  </header>
+
+  <main>
+    <section id="homePage" class="page">
+      <section class="hero">
+        <div class="hero-content">
+          <span class="eyebrow">स्वाद खोज्ने नयाँ गन्तव्य</span>
+          <h1>तपाईंको मनपर्ने<br><em>नेपाली स्वाद</em> यहीँ छ।</h1>
+          <p>नजिकका रेस्टुरेन्ट, स्वादिला परिकार र नयाँ ठाउँहरू सजिलै पत्ता लगाउनुहोस्।</p>
+          <div class="searchbar">
+            <span aria-hidden="true">⌕</span>
+            <input id="heroSearch" aria-label="रेस्टुरेन्ट, परिकार वा स्थान खोज्नुहोस्" placeholder="रेस्टुरेन्ट, परिकार वा स्थान खोज्नुहोस्...">
+            <button id="searchBtn" class="btn btn-primary">खोज्नुहोस्</button>
+          </div>
+          <div class="hero-note">● प्रारम्भिक नमुना सूची · डेमो डाटा</div>
+        </div>
+        <div class="hero-art" role="img" aria-label="नेपाली खानाको चित्र">
+          <div class="food-circle"><span>🥟</span></div><div class="floating-tag">आज के खाने? ✨</div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-heading"><div><span class="eyebrow">आफ्नो स्वाद छान्नुहोस्</span><h2>खाना अनुसार खोज्नुहोस्</h2></div></div>
+        <div id="categories" class="category-list"></div>
+      </section>
+
+      <section class="section">
+        <div class="section-heading"><div><span class="eyebrow">हाम्रो छनोट</span><h2 id="featuredTitle">लोकप्रिय रेस्टुरेन्टहरू</h2></div><button class="text-button" data-page="explore">सबै हेर्नुहोस् ↗</button></div>
+        <div id="restaurantGrid" class="restaurant-grid"></div>
+      </section>
+
+      <section class="promo">
+        <div><span class="eyebrow">डेमो अफर</span><h2>नयाँ स्वाद, नयाँ अनुभव!</h2><p>यो नमुना अफर हो। वास्तविक छुट उपलब्ध भएको दाबी गरिएको छैन।</p></div>
+        <div class="promo-icon">🍛</div>
+      </section>
+    </section>
+
+    <section id="explorePage" class="page hidden">
+      <div class="page-intro"><span class="eyebrow">तपाईंको अर्को स्वादिलो गन्तव्य</span><h1>रेस्टुरेन्ट खोज्नुहोस्</h1><p>खाना, स्थान, मूल्य वा रेटिङका आधारमा सूची छान्नुहोस्।</p></div>
+      <div class="filters">
+        <label>खोज्नुहोस्<input id="exploreSearch" placeholder="नाम, परिकार, स्थान..."></label>
+        <label>खानाको प्रकार<select id="cuisineFilter"><option value="">सबै प्रकार</option></select></label>
+        <label>जिल्ला/शहर<select id="cityFilter"><option value="">सबै स्थान</option><option>काठमाडौं</option><option>पोखरा</option><option>चितवन</option><option>ललितपुर</option></select></label>
+        <label>न्यूनतम रेटिङ<select id="ratingFilter"><option value="0">सबै रेटिङ</option><option value="4">४.०+</option><option value="4.5">४.५+</option></select></label>
+        <label>क्रम मिलाउनुहोस्<select id="sortFilter"><option value="popular">लोकप्रिय</option><option value="rating">उच्च रेटिङ</option><option value="priceLow">कम मूल्य</option><option value="newest">नयाँ थपिएका</option></select></label>
+      </div>
+      <p class="demo-label">नमुना रेस्टुरेन्टहरू — डेमो डाटा</p>
+      <div id="exploreGrid" class="restaurant-grid"></div>
+      <p id="emptyState" class="empty-state hidden">माफ गर्नुहोस्, तपाईंको खोजीसँग मिल्ने रेस्टुरेन्ट भेटिएन। फिल्टर परिवर्तन गरेर फेरि प्रयास गर्नुहोस्।</p>
+    </section>
+
+    <section id="detailsPage" class="page hidden">
+      <button id="backBtn" class="text-button back-button">← सूचीमा फर्कनुहोस्</button>
+      <div id="restaurantDetails"></div>
+    </section>
+
+    <section id="favoritesPage" class="page hidden">
+      <div class="page-intro"><span class="eyebrow">तपाईंको संग्रह</span><h1>मनपरेका रेस्टुरेन्ट</h1><p>यस ब्राउजरमा अस्थायी रूपमा राखिएका मनपर्ने सूचीहरू।</p></div>
+      <div id="favoritesGrid" class="restaurant-grid"></div>
+      <p id="favoritesEmpty" class="empty-state">अहिलेसम्म मनपर्ने रेस्टुरेन्ट छैन। रेस्टुरेन्ट कार्डमा ♡ थिच्नुहोस्।</p>
+    </section>
+
+    <section id="accountPage" class="page hidden">
+      <div class="auth-card">
+        <span class="auth-icon">👋</span><span class="eyebrow">तपाईंलाई स्वागत छ</span><h1>आफ्नो खाता</h1>
+        <p>यो डेमो संस्करणमा सुरक्षित लगइन जडान गरिएको छैन। खाता सुविधा प्रयोग गर्न Supabase Auth सेटअप गर्नुहोस्।</p>
+        <button id="authInfoBtn" class="btn btn-primary">सेटअप जानकारी</button>
+        <div id="authInfo" class="notice hidden">Supabase project URL र publishable/anon key लाई environment/config मा राख्नुहोस्, Auth providers सक्षम गर्नुहोस् र server/database RLS policies सेटअप गर्नुहोस्। गोप्य service-role key ब्राउजरमा नराख्नुहोस्।</div>
+      </div>
+    </section>
+
+    <section id="ownerPage" class="page hidden">
+      <div class="auth-card wide">
+        <span class="eyebrow">रेस्टुरेन्ट मालिकहरूका लागि</span><h1>आफ्नो रेस्टुरेन्ट दर्ता गर्नुहोस्</h1>
+        <p>मालिक प्यानलको वास्तविक दर्ता तथा submission का लागि Supabase Auth र database जडान आवश्यक छ। यो फारमले केवल demo preview देखाउँछ; डाटा स्थायी रूपमा सुरक्षित गर्दैन।</p>
+        <form id="ownerForm" class="owner-form">
+          <label>रेस्टुरेन्टको नाम<input id="ownerRestaurant" required placeholder="जस्तै: हिमालयन स्वाद"></label>
+          <label>मालिकको नाम<input id="ownerName" required placeholder="पूरा नाम"></label>
+          <label>सम्पर्क नम्बर<input id="ownerPhone" required type="tel" placeholder="+977..."></label>
+          <label>शहर<select id="ownerCity" required><option value="">शहर छान्नुहोस्</option><option>काठमाडौं</option><option>पोखरा</option><option>चितवन</option><option>ललितपुर</option></select></label>
+          <label class="full">छोटो विवरण<textarea id="ownerDescription" rows="3" placeholder="तपाईंको रेस्टुरेन्टको बारेमा"></textarea></label>
+          <button class="btn btn-primary full" type="submit">डेमो आवेदन पूर्वावलोकन</button>
+        </form>
+        <div id="ownerResult" class="notice hidden"></div>
+      </div>
+    </section>
+  </main>
+
+  <nav class="mobile-nav" aria-label="मोबाइल नेभिगेसन">
+    <button data-page="home" class="active"><span>⌂</span>गृहपृष्ठ</button>
+    <button data-page="explore"><span>⌕</span>खोज्नुहोस्</button>
+    <button data-page="favorites"><span>♡</span>मनपर्ने</button>
+    <button data-page="account"><span>◉</span>खाता</button>
+  </nav>
+  <footer><div class="brand"><span class="brand-mark">🍲</span><span><b>नेपाली रेस्टुरेन्ट हब</b><small>नेपालका स्वादहरू एकै ठाउँमा</small></span></div><p>© 2026 Nepali Restaurant Hub · डेमो संस्करण</p></footer>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <script src="app.js"></script>
+</body>
+</html>
